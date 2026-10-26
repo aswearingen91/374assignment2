@@ -86,12 +86,29 @@ struct movie *processFile(char *filePath, int *count){
     return head;
 }
 
-// Movies released in a given year.
+// Movies released in a specific year.
+void showMoviesByYear(struct movie *list){
+    int year;
+    int found = 0;
 
+    printf("Enter the year for which you want to see movies: ");
+    scanf("%d", &year);
+
+    while (list != NULL){
+        if (list->year == year){
+            printf("%s\n", list->title);
+            found = 1;
+        }
+        list = list->next;
+    }
+    if (!found){
+        printf("Nod data about movies released in the year %d\n", year);
+    }
+}
 
 // Highest rated movie for each year.
 
 
-// Movies released in a given language.
+// Movies released in a specific language.
 
 
