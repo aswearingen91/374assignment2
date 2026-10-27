@@ -125,6 +125,34 @@ void bestByYear(struct movie *list){
 
 
 // Movies released in a specific language.
-void moviesByLanguage
+void moviesByLanguage(struct movie *list){
+    char language[21];
+    int found = 0;
+
+    printf("Enter the language for which you want to see movies: ");
+    scanf("%s", language);
+
+    while (list != NULL){
+        for (int i = 0; i < list->numLanguages; i++){
+            if (strcmp(list->languages[i], language) == 0){
+                printf("%d %s\n", list->year, list->title);
+                found = 1;
+                break;
+            }
+        }
+        list = list->next;
+    }
+    if (!found){
+        printf("No data about movies released in %s\n", language);
+    }
+}
+
+void printMenu(void){
+    printf("\n1. Show movies in the specified year\n");
+    printf("2. Show highest rated movie for each year\n");
+    printf("3. Show the title and year of release of all movies in a specific language\n");
+    printf("4. Exit from the program\n\n");
+    printf("Enter a choice from 1 to 4 ");
+}
 
 
