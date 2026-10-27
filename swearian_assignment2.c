@@ -148,11 +148,45 @@ void moviesByLanguage(struct movie *list){
 }
 
 void printMenu(void){
-    printf("\n1. Show movies in the specified year\n");
+    printf("\n1. Show movies released in the specified year\n");
     printf("2. Show highest rated movie for each year\n");
     printf("3. Show the title and year of release of all movies in a specific language\n");
     printf("4. Exit from the program\n\n");
-    printf("Enter a choice from 1 to 4 ");
+    printf("Enter a choice from 1 to 4: ");
 }
 
+int main(int argc, char **argv){
+    if (argc < 2){
+        printf("You must provide the name of the file to process\n");
+        printf("Example usage: ./movies movies.csv\n");
+        return EXIT_FAILURE;
+    }
+    int count = 0;
+    struct movie *list = processFile(argv[1], &count);
+    printf("Processed file %s and parsed data for %d movies\n", argv[1], count);
 
+    int choice = 0;
+
+    while (choice != 4){
+        printMenu();
+        scanf("%d", &choice);
+
+        switch (choice){
+            case 1:
+                moviesByYear(list);
+                break;
+            case 2:
+                bestByYear(list);
+                break;
+            case 3:
+                moviesByLanguage(list);
+                break;
+            case 4:
+                break;
+            default:
+                printf("You entered an incorrect choice. Try again.\n");
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
