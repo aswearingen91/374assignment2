@@ -1,4 +1,4 @@
-#include <studio.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -14,7 +14,7 @@ struct movie{
 
 // Creates movie struct from one line of the CSV file.
 struct movie *createMovie(char *line){
-    struct movie *currMovie = malloc(sizeof(struct.movie));
+    struct movie *currMovie = malloc(sizeof(struct movie));
     char *saveptr;
 
     // Title
@@ -55,9 +55,9 @@ struct movie *createMovie(char *line){
     return currMovie;
 }
 
-// Reads CSV file, renturns linked list of movies
+// Reads CSV file, returns linked list of movies.
 struct movie *processFile(char *filePath, int *count){
-    FILE *movieFile = fopen(filePat, "r");
+    FILE *movieFile = fopen(filePath, "r");
 
     char *currLine = NULL;
     size_t len =0;
@@ -87,7 +87,7 @@ struct movie *processFile(char *filePath, int *count){
 }
 
 // Movies released in a specific year.
-void showMoviesByYear(struct movie *list){
+void moviesByYear(struct movie *list){
     int year;
     int found = 0;
 
@@ -102,13 +102,29 @@ void showMoviesByYear(struct movie *list){
         list = list->next;
     }
     if (!found){
-        printf("Nod data about movies released in the year %d\n", year);
+        printf("No data about movies released in the year %d\n", year);
     }
 }
 
 // Highest rated movie for each year.
+void bestByYear(struct movie *list){
+    for (int year = 1900; year <= 2021; year++){
+        struct movie *best = NULL;
+        struct movie *curr = list;
+        while (curr != NULL){
+            if (curr->year == year && (best == NULL || curr->rating > best->rating)){
+                best = curr;
+            }
+            curr = curr->next;
+        }
+        if (best != NULL){
+            printf("%d %.1f %s\n", best->year, best->rating, best->title);
+        }
+    }
+}
 
 
 // Movies released in a specific language.
+void moviesByLanguage
 
 
